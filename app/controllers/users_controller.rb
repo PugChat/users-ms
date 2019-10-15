@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-    
+
     #get
-    def index        
-        render json: users, status: 200
+    def index
+      render json: User.all, status: 200
     end
 
     #get
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
         user = User.find(params[:id])
         if user.update(user_params)
            render json:user, status:200
-        else 
+        else
             render json:user.errors, status: :unprocessable_entity
         end
     end
