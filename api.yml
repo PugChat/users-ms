@@ -1,0 +1,86 @@
+swagger: "2.0"
+info:
+  description: "Api encargado de la gestión de los usuarios de la aplicación PugChat. Microservicio creado en Ruby haciendo uso del framework Rails."
+  version: "1.0.0"
+  title: "USERS - API"
+host: "4002"
+basePath: "/users"
+schemes:
+- "https"
+- "http"
+paths:
+  /users:
+    get:
+      tags:
+      - "users"
+      summary: "Retorna la lista de usuarios creados en la aplicación"
+      operationId: "index"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/User"
+  /users/{id}:
+    get:
+      tags:
+      - "users"
+      summary: "Busca el usuario dado un id."
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "get"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id de usuario a buscar"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+              $ref: "#/definitions/User"
+        404:
+          description: "Not found"
+  /users/create:
+    post:
+      tags:
+      - "users"
+      summary: "Crea un nuevo usuario en la aplicación"
+      operationId: "addUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto usuario que va a ser creado en la aplicación."
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        201:
+          description: "Created"
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      mail:
+        type: "string"
+      username:
+        type: "string"
+      verification:
+        type: "integer" 
+        format: "int32"
+      active:
+        type: "integer"
+        format: "int32"  
+      password:
+        type: "string"
