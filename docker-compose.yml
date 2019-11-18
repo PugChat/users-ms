@@ -13,6 +13,7 @@ services:
       MYSQL_DATABASE: PugChat_users_ms_development
       MYSQL_USER: root
       MYSQL_PASSWORD: root
+      MYSQL_HOST: users-db
     ports: 
       - "3309:3306"
 
