@@ -13,3 +13,5 @@ ADD Gemfile /users-ms/Gemfile
 ADD Gemfile.lock /users-ms/Gemfile.lock
 RUN bundle install
 ADD . /users-ms
+
+CMD ["bash","-c",""sleep 40 && rm -f tmp/pids/server.pid && bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails db:seed && bundle exec rails s -b '0.0.0.0'""]
